@@ -122,6 +122,7 @@ public class SolAddressGenerator implements WalletAddressGenerator {
                 .address(publicKeyBase58)
                 .path(path)
                 .build();
+
     }
 
 }

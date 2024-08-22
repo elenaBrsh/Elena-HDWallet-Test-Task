@@ -3,7 +3,6 @@ package com.walletgenerator.utils;
 import org.bitcoinj.crypto.ChildNumber;
 import org.web3j.crypto.MnemonicUtils;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,11 +11,13 @@ import static com.walletgenerator.utils.Constants.MASTER_NODE_IDENTIFIER;
 import static com.walletgenerator.utils.Constants.PATH_SEPARATOR;
 
 public class CommonUtil {
+
     public static byte[] generateSeedFromMnemonic(String mnemonic) {
 
         return MnemonicUtils.generateSeed(mnemonic, null);
 
     }
+
 
     public static List<ChildNumber> parsePathWithHardAndSoft(String path) {
 
@@ -31,4 +32,5 @@ public class CommonUtil {
                 })
                 .collect(Collectors.toList());
     }
+
 }
