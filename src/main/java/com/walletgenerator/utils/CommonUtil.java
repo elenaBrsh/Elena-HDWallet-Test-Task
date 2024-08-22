@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import static com.walletgenerator.utils.Constants.MASTER_NODE_IDENTIFIER;
 import static com.walletgenerator.utils.Constants.PATH_SEPARATOR;
+import static com.walletgenerator.utils.Constants.QUOTE;
 
 public class CommonUtil {
 
@@ -25,7 +26,7 @@ public class CommonUtil {
                 .filter(component -> !component.equals(MASTER_NODE_IDENTIFIER))
                 .map(component -> {
 
-                    boolean hard = component.endsWith("'");
+                    boolean hard = component.endsWith(QUOTE);
                     int index = Integer.parseInt(hard ? component.substring(0, component.length() - 1) : component);
                     return new ChildNumber(index, hard);
 

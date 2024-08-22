@@ -16,9 +16,11 @@ import java.util.stream.IntStream;
 
 import static com.walletgenerator.utils.Constants.DERIVATION_NUMBER;
 import static com.walletgenerator.utils.Constants.ED_25519_SEED;
+import static com.walletgenerator.utils.Constants.EMPTY_STRING;
 import static com.walletgenerator.utils.Constants.HARDENED_INDEX_OFFSET;
 import static com.walletgenerator.utils.Constants.HMAC_SHA512_ALG;
 import static com.walletgenerator.utils.Constants.NUM_ADDRESSES;
+import static com.walletgenerator.utils.Constants.QUOTE;
 import static com.walletgenerator.utils.Constants.SOL_PATH;
 
 
@@ -33,7 +35,7 @@ public class SolAddressGenerator implements WalletAddressGenerator {
     return IntStream.range(0, NUM_ADDRESSES)
             .mapToObj(i -> {
                 try {
-                    String solPath = SOL_PATH + i + (i < DERIVATION_NUMBER ? "'" : "");
+                    String solPath = SOL_PATH + i + (i < DERIVATION_NUMBER ? QUOTE : EMPTY_STRING );
                     
                     List<ChildNumber> paths = CommonUtil.parsePathWithHardAndSoft(solPath);
                     

@@ -21,4 +21,10 @@ public class Constants {
 
     public static final String MASTER_NODE_IDENTIFIER = "m";
 
+    public static final String QUOTE = "'";
+
+    public static final String EMPTY_STRING = "";
+
+    public static final int RADIX = 16;
+
 }

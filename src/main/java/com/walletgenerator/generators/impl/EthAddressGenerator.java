@@ -13,8 +13,11 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static com.walletgenerator.utils.Constants.DERIVATION_NUMBER;
+import static com.walletgenerator.utils.Constants.EMPTY_STRING;
 import static com.walletgenerator.utils.Constants.ETH_PATH;
 import static com.walletgenerator.utils.Constants.NUM_ADDRESSES;
+import static com.walletgenerator.utils.Constants.QUOTE;
+import static com.walletgenerator.utils.Constants.RADIX;
 
 public class EthAddressGenerator implements WalletAddressGenerator {
 
@@ -27,7 +30,7 @@ public class EthAddressGenerator implements WalletAddressGenerator {
 
         return IntStream.range(0, NUM_ADDRESSES)
                 .mapToObj(i -> {
-                    String ethPath = ETH_PATH + i + (i < DERIVATION_NUMBER ? "'" : "");
+                    String ethPath = ETH_PATH + i + (i < DERIVATION_NUMBER ? QUOTE : EMPTY_STRING);
 
                     List<ChildNumber> paths = CommonUtil.parsePathWithHardAndSoft(ethPath);
 
@@ -47,8 +50,8 @@ public class EthAddressGenerator implements WalletAddressGenerator {
     private static Wallet buildEth(Bip32ECKeyPair derivedKeypair, Credentials credentials,String path) {
 
         return Wallet.builder()
-                .privateKey(derivedKeypair.getPrivateKey().toString(16))
-                .publicKey(derivedKeypair.getPublicKey().toString(16))
+                .privateKey(derivedKeypair.getPrivateKey().toString(RADIX))
+                .publicKey(derivedKeypair.getPublicKey().toString(RADIX))
                 .address(credentials.getAddress())
                 .path(path)
                 .build();
