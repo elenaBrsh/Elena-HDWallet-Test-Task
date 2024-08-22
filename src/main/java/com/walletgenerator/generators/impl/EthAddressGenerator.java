@@ -47,6 +47,7 @@ public class EthAddressGenerator implements WalletAddressGenerator {
                 })
                 .collect(Collectors.toList());
     }
+    
     private static Wallet buildEth(Bip32ECKeyPair derivedKeypair, Credentials credentials,String path) {
 
         return Wallet.builder()
