@@ -4,29 +4,31 @@ import org.bitcoinj.crypto.ChildNumber;
 import org.web3j.crypto.MnemonicUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static com.walletgenerator.utils.Constants.MASTER_NODE_IDENTIFIER;
+import static com.walletgenerator.utils.Constants.PATH_SEPARATOR;
 
 public class CommonUtil {
-
     public static byte[] generateSeedFromMnemonic(String mnemonic) {
 
-        byte[] seed = MnemonicUtils.generateSeed(mnemonic, null);
-        return seed;
+        return MnemonicUtils.generateSeed(mnemonic, null);
+
     }
 
     public static List<ChildNumber> parsePathWithHardAndSoft(String path) {
-        String[] components = path.split("/");
-        List<ChildNumber> result = new ArrayList<>();
 
-        for (String component : components) {
-            if (component.equals("m")) {
-                continue;
-            }
-            boolean hard = component.endsWith("'");
-            int index = Integer.parseInt(hard ? component.substring(0, component.length() - 1) : component);
-            result.add(new ChildNumber(index, hard));
-        }
+        return Arrays.stream(path.split(PATH_SEPARATOR))
+                .filter(component -> !component.equals(MASTER_NODE_IDENTIFIER))
+                .map(component -> {
 
-        return result;
+                    boolean hard = component.endsWith("'");
+                    int index = Integer.parseInt(hard ? component.substring(0, component.length() - 1) : component);
+                    return new ChildNumber(index, hard);
+
+                })
+                .collect(Collectors.toList());
     }
 }
